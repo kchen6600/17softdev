@@ -28,10 +28,17 @@ var findIt = function(e) {
   //console.log(y);
   var dist = distance(x,y,targetX, targetY);
   var maxdist = distance(0,0, boxWidth, boxHeight);
-  var diff = (maxdist - dist) % 256;
+  var diff = Math.floor((maxdist - dist)) % 256;
 
-  document.body.style.background = "" + diff + ", " + diff + ", " + diff + ""; 
-  //console.log( diff % 256);
+  //box.style.backgroundColor = 'rgb(' + [diff, diff, diff].join(',') + ')';
+  //'rgb(' + diff + ',' + diff + ',' + diff + ')'
+  document.body.style.backgroundColor = 'rgb(' + [diff, diff, diff].join(',') + ')';
+  while (diff >= 250) {
+    console.log("TRUEEEE");
+    box.style.cursor = "pointer";
+  }
+
+  //console.log( diff );
   //console.log(maxdist);
   //console.log(dist);
 };
