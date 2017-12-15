@@ -22,21 +22,34 @@ var distance = function (x0, y0, x1, y1) {
 //console.log (distance (0,0,2,2));
 
 var findIt = function(e) {
-  var x = e.clientX;
-  var y = e.clientY;
-  //console.log(x);
-  //console.log(y);
-  var dist = distance(x,y,targetX, targetY);
-  var maxdist = distance(0,0, boxWidth, boxHeight);
-  var diff = Math.floor((maxdist - dist)) % 256;
+    var x = e.clientX;
+    var y = e.clientY;
+    //console.log(x);
+    //console.log(y);
+    
+    var dist = Math.floor(distance(x,y,targetX, targetY));
+    var maxdist = distance(0,0, boxWidth, boxHeight);
 
-  //box.style.backgroundColor = 'rgb(' + [diff, diff, diff].join(',') + ')';
-  //'rgb(' + diff + ',' + diff + ',' + diff + ')'
-  document.body.style.backgroundColor = 'rgb(' + [diff, diff, diff].join(',') + ')';
-  while (diff >= 250) {
-    console.log("TRUEEEE");
-    box.style.cursor = "pointer";
-  }
+    if (dist > 255){
+	dist = 255;
+    }
+
+    dist = 255 - dist; 
+
+    //var diff = Math.floor((maxdist - dist)) ;
+
+    //box.style.backgroundColor = 'rgb(' + [diff, diff, diff].join(',') + ')';
+    //'rgb(' + diff + ',' + diff + ',' + diff + ')'
+
+    var color =  'rgb(' + [dist, dist, dist].join(',') + ')';
+    console.log(color);
+    document.body.style.backgroundColor = color;
+  //if  (diff >= 250) {
+    //console.log("TRUEEEE");
+    //box.style.cursor = "pointer";
+  //}
+   
+   // box.style.cursor = "default";
 
   //console.log( diff );
   //console.log(maxdist);
