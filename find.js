@@ -28,8 +28,9 @@ var findIt = function(e) {
     //console.log(y);
     
     var dist = Math.floor(distance(x,y,targetX, targetY));
-    var maxdist = distance(0,0, boxWidth, boxHeight);
+    var maxd = maxdist();
 
+    /**
     if (dist > 255){
 	dist = 255;
     }
@@ -40,22 +41,30 @@ var findIt = function(e) {
 
     //box.style.backgroundColor = 'rgb(' + [diff, diff, diff].join(',') + ')';
     //'rgb(' + diff + ',' + diff + ',' + diff + ')'
+    **/
 
-    var color =  'rgb(' + [dist, dist, dist].join(',') + ')';
+    var col = Math.floor((dist/maxd)*255);
+    var color = 'rgb(' + col + ","+col+","+col+")";
+    //var color =  'rgb(' + [dist, dist, dist].join(',') + ')';
     console.log(color);
     document.body.style.backgroundColor = color;
-  //if  (diff >= 250) {
-    //console.log("TRUEEEE");
-    //box.style.cursor = "pointer";
-  //}
-   
-   // box.style.cursor = "default";
+    if (dist < 20){
+	document.body.style.innerHTML = document.body.style.innerHTML + " div{cursor: pointer;}";
+    }
+    else{
+	document.body.style.innerHTML = document.body.style.innerHTML + "div{cursor: default;}";
+    };
 
-  //console.log( diff );
-  //console.log(maxdist);
-  //console.log(dist);
 };
 
+var maxdist = function(){
+    var corner1 = distance(0,0, targetX, targetY);
+    var corner2 = distance(0,boxWidth, targetX, targetY);
+    var corner3 = distance(boxHeight, 0, targetX, targetY);
+    var corner4 = distance(boxHeight, boxWidth, targetX, targetY);
+
+    return Math.max(corner1, Math.max( corner2, Math.max(corner3, corner4 ) ) )
+}
 /*
 your OTHER FXNS
 */
